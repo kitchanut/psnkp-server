@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use DateTimeInterface;
+
+
+class PriceRecord extends Model
+{
+    use HasFactory;
+    protected $guarded = [];
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
+
+    public function car_models()
+    {
+        return $this->belongsTo(Car_model::class, 'car_models_id')
+            ->select(['id', 'car_model_name']);
+    }
+
+    public function car_series()
+    {
+        return $this->belongsTo(Car_series::class, 'car_serie_id')
+            ->select(['id', 'car_series_name']);
+    }
+
+    public function car_serie_sub()
+    {
+        return $this->belongsTo(Car_serie_sub::class, 'car_serie_sub_id')
+            ->select(['id', 'car_serie_sub_name']);
+    }
+
+    public function color()
+    {
+        return $this->belongsTo(Color::class, 'color_id')
+            ->select(['id', 'color_name']);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id')
+            ->select(['id', 'first_name', 'last_name']);
+    }
+}
