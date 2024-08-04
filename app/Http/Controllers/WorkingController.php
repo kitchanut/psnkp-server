@@ -763,7 +763,7 @@ class WorkingController extends Controller
 
             // created_at
             $newData['created_at'] = $item['work_status'] >= 2 ? date_format($item['created_at'], "Y-m-d") : ' ';
-            $newData['interested_at'] = $item['work_status'] >= 2 ? date_format($item['created_at'], "Y-m-d") : ' ';
+            $newData['interested_at'] = $item['work_status'] >= 1 ? date_format($item['created_at'], "Y-m-d") : ' ';
 
             // status
             $newData['work_status'] = $item['work_status'];

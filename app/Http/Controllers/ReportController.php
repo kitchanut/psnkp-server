@@ -25,8 +25,6 @@ class ReportController extends Controller
                 $q->where('created_at', '>=', $timeStart);
                 $q->where('created_at', '<=', $timeEnd);
             })
-
-            // ->orderBy('created_at', 'DESC')
             ->get();
         return response()->json($output);
     }
@@ -35,7 +33,7 @@ class ReportController extends Controller
     {
         $timeStart = $request->input('timeStart');
         $timeEnd = $request->input('timeEnd');
-        $output = Car::with(['car_types', 'car_models', 'car_series', 'car_serie_sub', 'branch', 'color', 'province', 'province_current'])
+        $output = Car::with(['car_types', 'car_models', 'car_series', 'car_serie_sub', 'branch', 'color', 'province', 'province_current', 'partner_car'])
             ->where([['car_status', 1], ['car_date_buy', '>=', $timeStart], ['car_date_buy', '<=', $timeEnd]])
             ->orderBy('car_no', 'desc')
             ->get();
@@ -54,50 +52,6 @@ class ReportController extends Controller
             })
             ->orderBy('car_no', 'desc')
             ->get();
-
-        // $map = $query->map(function ($item) {
-        //     if ($item->working) {
-        //         if ($item->working->customer->customer_job == 1) {
-        //             $job = 'ข้าราชการ';
-        //         } elseif ($item->working->customer->customer_job == 2) {
-        //             $job = 'พนักงานเอกชน';
-        //         } elseif ($item->working->customer->customer_job == 3) {
-        //             $job = 'เกษตกร';
-        //         } elseif ($item->working->customer->customer_job == 4) {
-        //             $job = 'ค้าขาย';
-        //         } elseif ($item->working->customer->customer_job == 5) {
-        //             $job = 'อื่น ๆ - ' . $item->working->customer->customer_job_list;
-        //         } else {
-        //             $job = 'N/A';
-        //         }
-        //         $item->working->customer->job = $job;
-
-        //         if ($item->working->customer->customer_detail->district) {
-        //             $item->working->customer->address = $item->working->customer->customer_detail->customer_address . " ต." . $item->working->customer->customer_detail->district->name_th . " อ." . $item->working->customer->customer_detail->amphure->name_th . " จ." . $item->working->customer->customer_detail->province->name_th . " " . $item->working->customer->customer_detail->zip_code;
-        //         } else {
-        //             $item->working->customer->address = 'N/A';
-        //         }
-
-        //         if ($item->working->customer->customer_birthday_year) {
-        //             $item->working->customer->age = (int)date("Y") + 543 - (int)$item->working->customer->customer_birthday_year;
-        //         } else {
-        //             $item->working->customer->age = 'N/A';
-        //         }
-
-        //         $item->working->credit =  $item->working->appointment_banks->credit;
-        //     } else {
-        //         $Newitem['customer']['job'] = 'ไม่มีข้อมูล';
-        //         $Newitem['customer']['address'] = 'ไม่มีข้อมูล';
-        //         $Newitem['customer']['age'] = 'ไม่มีข้อมูล';
-        //         $Newitem['credit'] = 'ไม่มีข้อมูล';
-        //         $item['working'] = $Newitem;
-        //     }
-
-
-
-        //     return $item;
-        // });
-
         return response()->json($query);
     }
 
