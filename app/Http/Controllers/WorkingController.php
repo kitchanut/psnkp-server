@@ -487,14 +487,6 @@ class WorkingController extends Controller
         $updateStatusWorking->save();
     }
 
-    public function updatePedding(Request $request, $workingID)
-    {
-        $updateStatusWorking = Working::find($workingID);
-        $updateStatusWorking->pedding = $request->input('pedding');
-        $updateStatusWorking->save();
-    }
-
-
     public function work_where_id($id)
     {
         return response()->json(Working::where('id', 'like', $id . '%')->get());
@@ -756,7 +748,6 @@ class WorkingController extends Controller
     {
         return $data->map(function ($item) {
             $newData['id'] = $item['id'];
-            $newData['pedding'] = $item['pedding'];
             $newData['car_id'] = $item['car_id'];
             $newData['user'] = $item['user'] ? $item['user']['first_name'] : 'N/A';
 

@@ -190,7 +190,6 @@ Route::group([
     Route::post('working_search_id/{id}', 'WorkingController@work_where_id');
     Route::post('CheckWorking/{name}/{tel}', 'WorkingController@CheckWorking');
     Route::post('updateStatusWorking/{workingID}/', 'WorkingController@updateStatusWorking');
-    Route::post('updatePedding/{workingID}/', 'WorkingController@updatePedding');
     Route::post('followWork', 'WorkingController@followWork');
     Route::post('commission_month_by_team_branch', 'WorkingController@commission_month_by_team_branch');
     Route::post('updateNote/{workingID}/', 'WorkingController@updateNote');
